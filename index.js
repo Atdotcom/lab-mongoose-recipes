@@ -15,9 +15,52 @@ mongoose
     // Before adding any recipes to the database, let's remove all existing ones
     return Recipe.deleteMany()
   })
-  .then(() => {
-    // Run your code here, after you have insured that the connection was made
-  })
-  .catch(error => {
-    console.error('Error connecting to the database', error);
-  });
+  .then(() => 
+    //Run your code here, after you have insured that the connection was made
+   Recipe.create =({
+               title: "Corn Pie",
+               level: "Amateur Chef",
+               ingredients: [
+                "Beef",
+                 "Onions", 
+                 "Garlic", 
+                 "Paprika", 
+                 "Cumin",
+                 "Salt",
+                "Raisins",
+                "chicken",
+                "Heggs",
+                "Corn" ,
+                "Cream",
+                "Basil"],
+               cuisine: "Chilean",
+               dishType: "main_course",
+               image: "https://gypsyplate.com/wp-content/uploads/2019/10/pastel-de-choclo_6.jpg",
+               duration: 90,
+               creator: "Chilean folk"
+    
+    })
+  )
+  .then(favRecipe => 
+    console.log("title of recipe", favRecipe.title))
+
+    .then(() => Recipe.insertMany(data))
+    .then(recipeArray => recipeArray.forEach(recipe => console.log("title of recipe: ", recipe.title)))
+
+    .then(() => Recipe.findOneAndUpdate({title: "Rigatoni alla Genovese"}, {duration: 100}))
+
+    .then(()=> console.log("recipe duration updated successfully. New duration: "))
+
+    .then(() => Recipe.deleteOne({title: "Carrot Cake"}))
+    .then(() => console.log(`"The recipe has been deleted`))
+
+    // then(() => {
+    //   mongoose.connection.close(() => {
+    //       console.log('Mongoose default connection disconnected through app termination');
+    //       process.exit(0);
+    //     });
+    // })
+    
+  .catch(error => 
+    console.error('Error connecting to the database', error)
+  );
